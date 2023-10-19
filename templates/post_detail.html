@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div id="main">
+    <div id="content" class="left">
+        
+        <div class="projects">
+            <h3>{{ post.title }}</h3>
+            <div class="item">
+                <div class="image left">
+                    {% if post.img %}
+                    <a href="#"><img src="{{ post.img.url }}" alt="" width="200"/></a>
+                    {% endif %}
+                </div>
+                <div class="text left">
+                    <p>{{ post.tixt }}</p>
+                    <p>Автор: {{ post.author }} | {{ post.date }}</p>
+                </div>
+                <div class="cl">&nbsp;</div>
+            </div>
+            <p>
+                <a href="{% url 'post_edit' post.pk %}">Tahrirlash</a>
+            </p>
+            <p>
+                <a href="{% url 'post_delete' post.pk %}">O'chirish</a>
+            </p>
+            <div class="form_comment">
+                <h3>Izoh Qoldirish</h3>
+                <div class="">
+                    <form action="{% url 'add_comment' post.id %}" method="post">
+                        {% csrf_token %}
+                        <div class="">
+                            <label for="">Ismingiz</label>
+                            <input type="text" name="name" required>
+                        </div>
+                        <div class="">
+                            <label for="">Email</label>
+                            <input type="email" name="email">
+                        </div>
+                        <div class="">
+                            <label for="">Izohingiz</label>
+                            <textarea name="text_comment" id="" cols="30" rows="10"></textarea>
+                        </div>
+                        <div class="">
+                            <input type="submit" value="Yuborish">
+                        </div>
+                    </form>
+                </div>
+                <div class="">
+                    {% for comment in post.comments_set.all %}
+                    <div class="">
+                        <h4>{{ comment.name }}</h4>
+                        <p>{{ comment.text_comment }}</p>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="cl">&nbsp;</div>
+</div>
+{% endblock content %}

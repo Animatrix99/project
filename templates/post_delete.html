@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div id="main">
+    <div id="content" class="left">
+        
+        <div class="projects">
+            <h3>Tahrirlash</h3>
+            <div class="item">
+                <form action="" method="post">
+                    {% csrf_token %}
+                    <p>{{ post.title }} postini o'chirasizmi? </p>
+                    <input type="submit" value="Ha">
+                    <a href="{% url 'post_detail' post.pk %}">Yo'q</a>
+                </form>
+                <!-- <div class="cl">&nbsp;</div> -->
+            </div>
+        </div>
+    </div>
+    
+    <div class="cl">&nbsp;</div>
+</div>
+{% endblock content %}

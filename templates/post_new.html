@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div id="main">
+    <div id="content" class="left">
+        
+        <div class="projects">
+            <h3>Yangi post</h3>
+            <div class="item">
+                <form action="" method="post">
+                    {% csrf_token %}
+                    {{form.as_p}}
+                    <input type="submit" value="Saqlash">
+                </form>
+                <!-- <div class="cl">&nbsp;</div> -->
+            </div>
+        </div>
+    </div>
+    
+    <div class="cl">&nbsp;</div>
+</div>
+{% endblock content %}

@@ -1,0 +1,61 @@
+{% load static %}
+<!DOCTYPE>
+<html >
+<head>
+	<title>Мой блог</title>
+	<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+	<link rel="stylesheet" href="{% static 'css/style.css' %}" type="text/css" media="all" />
+
+	<link rel="shortcut icon" href="css/images/favicon.ico" />
+
+</head>
+<body>
+<div class="shell">
+	<div class="border">
+
+		<div id="navigation">
+			<ul>
+			    <li><a href="/" class="active">Главная</a></li>
+			    <li><a href="/admin">Админ панель</a></li>
+			    
+			</ul>
+		</div>
+
+        {% block content %}
+        {% endblock content %}
+		
+		{% if page_obj.has_other_pages %}
+		<div class="pagin">
+			<ul>
+				{% if page_obj.has_previous %}
+				<li>
+					<a href="?page={{ page_obj.previous_page_number }}"><<<</a>
+				</li>
+				{% endif %}
+				{% for p in page_obj.paginator.page_range %}
+				{% if page_obj.number == p %}
+				<li class="act">{{ p }}</li>
+				{% elif p >= page_obj.number|add:-2 and p <= page_obj.number|add:2 %}
+				<li>
+					<a href="?page={{ p }}">{{ p }}</a>
+				</li>
+				{% endif %}
+				{% endfor %}
+				{% if page_obj.has_next %}
+				<li>
+					<a href="?page={{ page_obj.next_page_number }}">>>></a>
+				</li>
+				{% endif %}
+			</ul>
+		</div>
+		{% endif %}
+		
+	</div>
+	
+	<div id="footer">
+        <p><a href="{% url 'post_new' %}">Yangi post qo'shish</a></p>
+		<p class="copy right">Copyright &copy;  2022 </p>
+	</div>
+</div>
+</body>
+</html>

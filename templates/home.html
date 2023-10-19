@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div id="main">
+    <div id="content" class="left">
+        
+        <div class="projects">
+            <h3>Записи</h3>
+            {% for post in page_obj %}
+            <div class="item">
+                <div class="image left">
+                    {% if post.img %}
+                    <a href="#"><img src="{{ post.img.url }}" alt="" width="200"/></a>
+                    {% endif %}
+                </div>
+                <div class="text left">
+                    <h4><a href="{% url 'post_detail' post.pk %}">{{ post.title }}</a></h4>
+                    <p>{{ post.tixt | slice:':250' }}...</p>
+                    <p>Автор: {{ post.author }} | {{ post.date }}</p>
+                    <a href="{% url 'post_detail' post.pk %}">Batafsil malumot...</a>
+                </div>
+                <div class="cl">&nbsp;</div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    
+    <div class="cl">&nbsp;</div>
+</div>
+{% endblock content %}
